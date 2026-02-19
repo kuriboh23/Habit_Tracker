@@ -1,0 +1,51 @@
+class AppStrings {
+  // Prevent instantiation
+  AppStrings._();
+
+  // --- General ---
+  static const String appName = "Habit Streak";
+
+  // --- Home Screen ---
+  static const String homeDateHeading = "Fri, 18th May";
+  static const String homeTodayHeading = "Today";
+  static const String homeNewHabitBtn = "Add Habit";
+  static const String homeNoHabits = "No habits for today. Start small!";
+  static const String homeProgressTitle = "Progress";
+  
+  // Weekdays (for your calendar strip)
+  static const String mon = "Mo";
+  static const String tue = "Tu";
+  static const String wed = "We";
+  static const String thu = "Th";
+  static const String fri = "Fr";
+  static const String sat = "Sa";
+  static const String sun = "Su";
+
+  // --- Add New Habit Screen (The list of categories) ---
+  static const String addHabitTitle = "Add New Habit";
+  static const String done = "Done";
+  
+
+  // Default Categories
+  static const String catHealth = "Health";
+  static const String catProductivity = "Work & Study";
+  static const String catMindfulness = "Mindfulness";
+  static const String catFitness = "Fitness";
+  static const String catFinance = "Finance";
+  static const String catSocial = "Social";
+
+  // --- Create Habit Screen (The form) ---
+  static const String createHabitTitle = "Create Habit";
+  static const String habitNameHint = "Details...";
+  static const String selectIcon = "Icon";
+  static const String selectColor = "Color";
+  static const String createBtn = "Create";
+  static const String updateBtn = "Update"; // For when they edit a habit
+
+  // --- Dialogs & Alerts ---
+  static const String deleteConfirmTitle = "Delete Habit?";
+  static const String deleteConfirmDesc = "Are you sure you want to delete this habit? Your streak will be lost!";
+  static const String cancel = "Cancel";
+  static const String delete = "Delete";
+  static const String fieldRequired = "This field cannot be empty";
+}
