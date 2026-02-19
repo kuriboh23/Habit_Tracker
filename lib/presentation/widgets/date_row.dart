@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/core/utils/helper.dart';
 
 class DateRow extends StatelessWidget {
 
@@ -9,18 +10,25 @@ class DateRow extends StatelessWidget {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
 
-    final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    final dates = [7, 8, 9, 10, 11, 12, 13];
-    final todayIndex = 'thu';
+    final days = Helper().getWeekDays();
+    final dates = Helper().getWeekDates();
+    final today = Helper().getTodayDate();
     return Container(
       width: double.infinity,
       decoration: BoxDecoration( // Light background like in the image
         borderRadius: BorderRadius.circular(8), // Optional rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(6),
+            blurRadius: 12,
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(7, (index) {
-          final isToday = days[index].toLowerCase() == todayIndex;
+          final isToday = dates[index] == today;
           return Column(
             children: [
               Text(
@@ -33,11 +41,15 @@ class DateRow extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                width: 43,
-                height: 43,
+                width: 45,
+                height: 45,
                 decoration: BoxDecoration(
+                  border: BoxBorder.all(
+                  color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
+                  width: 1.5,
+                ),
                   shape: BoxShape.circle,
-                  color: isToday ? colors.secondary : Colors.white,
+                  color: isToday ? colors.secondary.withAlpha(205) : Colors.white,
                 ),
                 child: Center(
                   child: Text(

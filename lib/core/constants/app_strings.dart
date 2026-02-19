@@ -1,3 +1,5 @@
+import 'package:habit_tracker/core/utils/helper.dart';
+
 class AppStrings {
   // Prevent instantiation
   AppStrings._();
@@ -6,25 +8,15 @@ class AppStrings {
   static const String appName = "Habit Streak";
 
   // --- Home Screen ---
-  static const String homeDateHeading = "Fri, 18th May";
+  static String get homeDateHeading => Helper().getFormattedDate();
   static const String homeTodayHeading = "Today";
   static const String homeNewHabitBtn = "Add Habit";
   static const String homeNoHabits = "No habits for today. Start small!";
   static const String homeProgressTitle = "Progress";
-  
-  // Weekdays (for your calendar strip)
-  static const String mon = "Mo";
-  static const String tue = "Tu";
-  static const String wed = "We";
-  static const String thu = "Th";
-  static const String fri = "Fr";
-  static const String sat = "Sa";
-  static const String sun = "Su";
 
-  // --- Add New Habit Screen (The list of categories) ---
+  // --- Add New Habit Screen ---
   static const String addHabitTitle = "Add New Habit";
   static const String done = "Done";
-  
 
   // Default Categories
   static const String catHealth = "Health";
@@ -34,13 +26,13 @@ class AppStrings {
   static const String catFinance = "Finance";
   static const String catSocial = "Social";
 
-  // --- Create Habit Screen (The form) ---
+  // --- Create Habit Screen ---
   static const String createHabitTitle = "Create Habit";
   static const String habitNameHint = "Details...";
   static const String selectIcon = "Icon";
   static const String selectColor = "Color";
   static const String createBtn = "Create";
-  static const String updateBtn = "Update"; // For when they edit a habit
+  static const String updateBtn = "Update";
 
   // --- Dialogs & Alerts ---
   static const String deleteConfirmTitle = "Delete Habit?";
@@ -48,4 +40,5 @@ class AppStrings {
   static const String cancel = "Cancel";
   static const String delete = "Delete";
   static const String fieldRequired = "This field cannot be empty";
+
 }
