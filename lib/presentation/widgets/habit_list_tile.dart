@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
 import 'package:habit_tracker/data/models/habit.dart';
+import 'package:habit_tracker/data/repositories/habit_repository.dart';
 
 class HabitListTile extends StatefulWidget {
   final Habit habit;
@@ -82,9 +83,7 @@ class _HabitListTileState extends State<HabitListTile> {
             Checkbox(
               value: widget.habit.isCompleted,
               onChanged: (value) {
-                setState(() {
-                  widget.habit.isCompleted = !widget.habit.isCompleted;
-                });
+                HabitRepository().toggleHabitCompletion(widget.habit);
               },
               activeColor: baseColor.checkboxFill,
               shape: CircleBorder(),
