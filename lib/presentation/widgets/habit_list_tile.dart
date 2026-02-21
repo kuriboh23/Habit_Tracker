@@ -7,8 +7,9 @@ import 'package:habit_tracker/data/repositories/habit_repository.dart';
 class HabitListTile extends StatefulWidget {
   final Habit habit;
   final Function(BuildContext)? onPressed;
+  final Function(BuildContext)? onDelete;
 
-  const HabitListTile({super.key, required this.habit, this.onPressed});
+  const HabitListTile({super.key, required this.habit, this.onPressed, this.onDelete});
 
   @override
   State<HabitListTile> createState() => _HabitListTileState();
@@ -33,13 +34,21 @@ class _HabitListTileState extends State<HabitListTile> {
         key: ValueKey(widget.habit.title),
         endActionPane: ActionPane(
           motion: StretchMotion(),
-          extentRatio: 0.24,
+          extentRatio: 0.5,
           children: [
             SlidableAction(
               onPressed: widget.onPressed,
-              borderRadius: BorderRadius.circular(24),
-              icon: Icons.no_adult_content_rounded,
+              icon: Icons.skip_next_rounded,
               backgroundColor: baseColor,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(16),bottomLeft: Radius.circular(16)),
+              label: 'Skip',
+            ),
+            SlidableAction(
+              onPressed: widget.onDelete,
+              icon: Icons.delete_forever_rounded,
+              backgroundColor: Colors.red,
+              borderRadius: BorderRadius.only(topRight: Radius.circular(16),bottomRight: Radius.circular(16)),
+              label: 'Delete',
             ),
           ],
         ),

@@ -14,15 +14,18 @@ class DoneHabitsBadge extends StatelessWidget {
     required this.doneColor,
   });
 
+
+
   @override
   Widget build(BuildContext context) {
+    final bool isDone = (count >0 && count == total);
     final theme = Theme.of(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
       decoration: BoxDecoration(
         border: BoxBorder.all(
-          color: count == total ? doneColor : color.withAlpha(150),
+          color: isDone ? doneColor : color.withAlpha(150),
           width: 2,
         ),
         color:Colors.white,
@@ -36,7 +39,7 @@ class DoneHabitsBadge extends StatelessWidget {
             style: theme.textTheme.bodyMedium?.copyWith(
               fontSize: 18,
               fontWeight: FontWeight.w700,
-              color: count == total ? doneColor : color.withAlpha(150),
+              color: isDone ? doneColor : color.withAlpha(150),
             ),
           ),
           const SizedBox(width: 6),

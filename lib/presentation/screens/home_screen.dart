@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10, bottom: 100),
                   itemCount: habits.length,
                   itemBuilder: (context, index) {
-                  return HabitListTile(habit: habits[index]);
+                  return HabitListTile(habit: habits[index],onDelete: (p0) => HabitRepository().deleteHabit(habits[index]),);
                 },),
               )),
             ],
