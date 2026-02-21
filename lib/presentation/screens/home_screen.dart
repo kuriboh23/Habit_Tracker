@@ -10,7 +10,7 @@ import 'package:habit_tracker/presentation/widgets/habit_list_tile.dart';
 import 'package:habit_tracker/presentation/widgets/streak_badge.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Habit> habits = AppLists.habits;
+  final List<Habit> habits = AppLists.habits.reversed.toList();
 
   HomeScreen({super.key});
 
@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   fontSize: 32
                 ),),
                 SizedBox(width: 24,),
-                DoneHabitsBadge(count: 5, total: 5, color: colors.onSurface, doneColor: colors.secondary),
+                DoneHabitsBadge(count: habits.where((h) => h.isCompleted).length, total: habits.length, color: colors.onSurface, doneColor: colors.secondary),
 
               ],
             ),

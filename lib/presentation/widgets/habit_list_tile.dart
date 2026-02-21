@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
 import 'package:habit_tracker/data/models/habit.dart';
 
-class HabitListTile extends StatelessWidget {
+class HabitListTile extends StatefulWidget {
 
   final Habit habit;
 
@@ -12,12 +12,17 @@ class HabitListTile extends StatelessWidget {
   });
 
   @override
+  State<HabitListTile> createState() => _HabitListTileState();
+}
+
+class _HabitListTileState extends State<HabitListTile> {
+  @override
   Widget build(BuildContext context) {
 
-    final baseColor = Color(habit.colorValue);
+    final baseColor = Color(widget.habit.colorValue);
 
     final icon = IconData(
-      habit.iconCodePoint,
+      widget.habit.iconCodePoint,
       fontFamily: 'MaterialIcons',
     );
 
@@ -56,14 +61,14 @@ class HabitListTile extends StatelessWidget {
               const SizedBox(width: 16),
 
               Text(
-                habit.title,
+                widget.habit.title,
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
                     ?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: baseColor.textColor,
-                      decoration: habit.isCompleted
+                      decoration: widget.habit.isCompleted
                           ? TextDecoration.lineThrough
                           : null,
                     ),
@@ -73,8 +78,12 @@ class HabitListTile extends StatelessWidget {
 
           /// CHECKBOX
           Checkbox(
-            value: habit.isCompleted,
-            onChanged: (value) {},
+            value: widget.habit.isCompleted,
+            onChanged: (value) {
+              setState(() {
+                widget.habit.isCompleted = !widget.habit.isCompleted;
+              });
+            },
             activeColor: baseColor.checkboxFill,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6),
