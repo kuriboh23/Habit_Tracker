@@ -15,8 +15,7 @@ class DateRow extends StatelessWidget {
     final today = Helper().getTodayDate();
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration( // Light background like in the image
-        borderRadius: BorderRadius.circular(8), // Optional rounded corners
+      decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(6),
@@ -36,7 +35,7 @@ class DateRow extends StatelessWidget {
                 style: TextStyle(
                       color: isToday ? colors.onSurface : colors.onSurface.withAlpha(130),
                       fontWeight: isToday ? FontWeight.w700 : FontWeight.normal,
-                      fontSize: 13,
+                      fontSize: isToday ? 14 : 13,
                     ),
               ),
               const SizedBox(height: 8),
@@ -57,7 +56,7 @@ class DateRow extends StatelessWidget {
                     style: TextStyle(
                       color: isToday ? colors.onSurface : colors.onSurface.withAlpha(180),
                       fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
-                      fontSize: 13,
+                      fontSize: isToday ? 14 : 13,
                     ),
                   ),
                 ),

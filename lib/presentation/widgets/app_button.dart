@@ -55,7 +55,7 @@ class AppButton extends StatelessWidget {
       child : Container(
         width: double.infinity,
         
-          padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
           child: Text(
             textAlign: TextAlign.center,
             label,

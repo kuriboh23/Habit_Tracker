@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
+import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -35,17 +36,8 @@ class BottomNavBar extends StatelessWidget {
               Navigator.pushNamed(context, '/addHabitPage');
             }),          
           const Spacer(),
-          IconButton(
-            onPressed: () {
-            },
-            icon: Icon(Icons.auto_graph_rounded, size: 24, color: colors.onSurface), 
-            style: IconButton.styleFrom(
-              backgroundColor: colors.surface, 
-              shape: CircleBorder(
-                side: BorderSide(width: 2, color: colors.surface),
-              ),
-            ),
-          ),
+          NavIconButton(colors: colors, icon: Icons.auto_graph_rounded),
+          NavIconButton(colors: colors, icon: Icons.person_2_rounded)
         ],
       ),
     );

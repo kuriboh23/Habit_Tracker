@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_tracker/core/constants/lists.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
 import 'package:intl/intl.dart';
 
@@ -61,20 +62,7 @@ int getTodayDate() {
 
   final List<Color> colorsPalletes = HabitPalettes.colors;
 
-  final List<IconData> iconOptions = [
-    Icons.emoji_emotions_outlined,
-    Icons.star_outline,
-    Icons.fitness_center,
-    Icons.bookmark_outline,
-    Icons.brush_outlined,
-    Icons.coffee_outlined,
-    Icons.ramen_dining_sharp,
-    Icons.qr_code_rounded,
-    Icons.travel_explore_rounded,
-    Icons.man_2_rounded,
-    Icons.bedroom_baby_rounded,
-    Icons.woman_2_rounded
-  ];
+  final List<IconData> iconOptions = AppLists.iconOptions;
 
   IconData selectedIcon = Icons.emoji_emotions_outlined;
   Color selectedColor = HabitPalettes.colors[2];

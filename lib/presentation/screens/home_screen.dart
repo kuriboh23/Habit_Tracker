@@ -45,7 +45,6 @@ class HomeScreen extends StatelessWidget {
                 ),),
                 SizedBox(width: 24,),
                 DoneHabitsBadge(count: habits.where((h) => h.isCompleted).length, total: habits.length, color: colors.onSurface, doneColor: colors.secondary),
-
               ],
             ),
             Expanded(child: 
@@ -61,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                 return HabitListTile(habit: habits[index]);
               },),
-            ))
+            )),
           ],
         ),
       ),

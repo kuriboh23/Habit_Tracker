@@ -6,6 +6,7 @@ class HabitPalettes {
     Color(0xFF2196F3), // Blue
     Color(0xFFFF9800), // Orange
     Color(0xFFE91E63), // Pink
+    Color(0xFFC508DA), // Violet
   ];
 }
 

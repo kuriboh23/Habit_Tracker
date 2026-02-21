@@ -27,7 +27,7 @@ class AppStrings {
   static const String catSocial = "Social";
 
   // --- Create Habit Screen ---
-  static const String createHabitTitle = "Create Habit";
+  static const String createHabitTitle = "Create New Habit";
   static const String habitNameHint = "Details...";
   static const String selectIcon = "Icon";
   static const String selectColor = "Color";
