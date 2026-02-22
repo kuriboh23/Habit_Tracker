@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
 import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:habit_tracker/presentation/screens/add_habit_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -32,9 +34,23 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center, 
         children: [
-          AppButton(iconColor: colors.onSurface, bgColor: colors.surface, theme: theme, icon: Icons.add_rounded, size: 26, label: AppStrings.homeNewHabitBtn, function:() {
-              Navigator.pushNamed(context, '/addHabitPage');
-            }),          
+          AppButton(
+            iconColor: colors.onSurface,
+            bgColor: colors.surface,
+            theme: theme,
+            icon: Icons.add_rounded,
+            size: 26,
+            label: AppStrings.homeNewHabitBtn,
+            function: () {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).push(PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) => const AddHabitPage(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero,
+                ));
+              });
+            },
+          ),
           const Spacer(),
           NavIconButton(colors: colors, icon: Icons.auto_graph_rounded),
           NavIconButton(colors: colors, icon: Icons.person_2_rounded)

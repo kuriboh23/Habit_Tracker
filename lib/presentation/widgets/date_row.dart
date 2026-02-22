@@ -38,7 +38,7 @@ class DateRow extends StatelessWidget {
                       fontSize: isToday ? 14 : 13,
                     ),
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
               Container(
                 width: 45,
                 height: 45,
@@ -48,15 +48,15 @@ class DateRow extends StatelessWidget {
                   width: 1.5,
                 ),
                   shape: BoxShape.circle,
-                  color: isToday ? colors.secondary.withAlpha(205) : Colors.white,
+                  color: isToday ? colors.onSurface.withAlpha(220) : Colors.white,
                 ),
                 child: Center(
                   child: Text(
                     '${dates[index]}',
                     style: TextStyle(
-                      color: isToday ? colors.onSurface : colors.onSurface.withAlpha(180),
+                      color: isToday ? colors.surface : colors.onSurface.withAlpha(180),
                       fontWeight: isToday ? FontWeight.w700 : FontWeight.w500,
-                      fontSize: isToday ? 14 : 13,
+                      fontSize: 13,
                     ),
                   ),
                 ),

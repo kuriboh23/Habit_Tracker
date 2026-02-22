@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
-import 'package:habit_tracker/core/constants/lists.dart';
+import 'package:habit_tracker/data/local/habit_provider.dart';
 import 'package:habit_tracker/data/models/habit.dart';
 import 'package:habit_tracker/data/repositories/habit_repository.dart';
 import 'package:habit_tracker/presentation/widgets/bottom_nav_bar.dart';
@@ -9,17 +9,33 @@ import 'package:habit_tracker/presentation/widgets/date_row.dart';
 import 'package:habit_tracker/presentation/widgets/done_habits_badge.dart';
 import 'package:habit_tracker/presentation/widgets/habit_list_tile.dart';
 import 'package:habit_tracker/presentation/widgets/streak_badge.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
-  final List<Habit> habits = AppLists.habits.reversed.toList();
+class HomeScreen extends StatefulWidget {
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    // Load habits when screen appears (auto-updates streaks)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HabitProvider>(context, listen: false).loadHabits();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+
+    final List<Habit> habits = context.watch<HabitProvider>().habits.reversed.toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -31,16 +47,12 @@ class HomeScreen extends StatelessWidget {
           SizedBox(width: 12,)
         ],
       ),
-      body: ValueListenableBuilder(
-        
-        valueListenable: Hive.box<Habit>(HabitRepository.boxName).listenable(), builder: (context, Box<Habit> box, _) {
-          List<Habit> habits = box.values.toList();
-        return Padding(
+      body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16,),
+              SizedBox(height: 28,),
               DateRow(),
               SizedBox(height: 26,),
               Row(
@@ -64,13 +76,14 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10, bottom: 100),
                   itemCount: habits.length,
                   itemBuilder: (context, index) {
-                  return HabitListTile(habit: habits[index],onDelete: (p0) => HabitRepository().deleteHabit(habits[index]),);
+                  return HabitListTile(
+                    habit: habits[index],
+                    onDelete: (p0) => context.read<HabitProvider>().deleteHabit(habits[index]),
+                  );
                 },),
               )),
             ],
           ),
-        );
-        }
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BottomNavBar(colors: colors, theme: theme),

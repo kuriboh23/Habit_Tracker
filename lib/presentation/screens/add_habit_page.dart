@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
-import 'package:habit_tracker/core/constants/lists.dart';
+import 'package:habit_tracker/data/local/habit_provider.dart';
 import 'package:habit_tracker/data/models/habit.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
 import 'package:habit_tracker/data/repositories/habit_repository.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
 import 'package:habit_tracker/presentation/widgets/select_ic_buttons.dart';
+import 'package:provider/provider.dart';
 
 class AddHabitPage extends StatefulWidget {
   const AddHabitPage({super.key});
@@ -36,7 +37,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
     });
   }
 
-  void _onDone() async{
+  Future<void> _onDone(HabitProvider habitProvider) async{
     final title = _titleController.text.trim();
     if (title.isEmpty) return;
 
@@ -49,8 +50,8 @@ class _AddHabitPageState extends State<AddHabitPage> {
       iconCodePoint: iconCodePoint,
     );
 
-    await HabitRepository().addHabit(newHabit);
-     if (mounted) {
+    await context.read<HabitProvider>().addHabit(newHabit);
+    if (mounted) {
       Navigator.of(context).pop();
     }
   }
@@ -59,6 +60,8 @@ class _AddHabitPageState extends State<AddHabitPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
+
+    final habitProvider = context.read<HabitProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -108,9 +111,12 @@ class _AddHabitPageState extends State<AddHabitPage> {
                     controller: _titleController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    maxLength: 20,
                     expands: true,
                     textAlignVertical: TextAlignVertical.top,
-                    inputFormatters: [LengthLimitingTextInputFormatter(16)],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'[\n]')),
+                    ],
                     style: const TextStyle(fontWeight: FontWeight.w500),
                     decoration: InputDecoration.collapsed(
                       hintText: 'e.g. No junk food',
@@ -126,7 +132,7 @@ class _AddHabitPageState extends State<AddHabitPage> {
               textColor: colors.surface,
               bgColor: colors.onSurface,
               theme: theme,
-              function: _onDone,
+              function: () => _onDone(habitProvider),
             ),
             const SizedBox(height: 20),
           ],

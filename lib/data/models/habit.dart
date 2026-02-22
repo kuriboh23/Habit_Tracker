@@ -16,10 +16,14 @@ class Habit extends HiveObject {
   @HiveField(3)
   bool isCompleted;
 
+  @HiveField(4)
+  int streak;
+
   Habit({
     required this.title,
     required this.colorValue,
     required this.iconCodePoint,
     this.isCompleted = false,
+    this.streak = 0,
   });
 }

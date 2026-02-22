@@ -21,13 +21,14 @@ class HabitAdapter extends TypeAdapter<Habit> {
       colorValue: fields[1] as int,
       iconCodePoint: fields[2] as int,
       isCompleted: fields[3] as bool,
+      streak: fields[4] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Habit obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class HabitAdapter extends TypeAdapter<Habit> {
       ..writeByte(2)
       ..write(obj.iconCodePoint)
       ..writeByte(3)
-      ..write(obj.isCompleted);
+      ..write(obj.isCompleted)
+      ..writeByte(4)
+      ..write(obj.streak);
   }
 
   @override

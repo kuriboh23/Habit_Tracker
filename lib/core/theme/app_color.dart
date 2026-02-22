@@ -5,7 +5,7 @@ class AppColors {
   AppColors._();
 
   // --- Core Colors ---
-  static const Color primary = Color(0xFF6B4EFF); // A nice purple/indigo
+  static const Color primary = Color(0xFFFB135C); // A nice purple/indigo
   static const Color secondary = Color(0xFFFFAF26); // Pastel orange for accents
 
   // --- Backgrounds ---

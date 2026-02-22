@@ -14,7 +14,7 @@ class HabitRepository {
   }
 
   // 2. Read (Get All)
-  List<Habit> getHabits() {
+  Future<List<Habit>> getAllHabits() async {
     return _box.values.toList();
   }
 
@@ -26,6 +26,12 @@ class HabitRepository {
   Future<void> toggleHabitCompletion(Habit habit) async {
     // 1. Change the value in memory
     habit.isCompleted = !habit.isCompleted; 
+    final isComplete = habit.isCompleted;
+    if (isComplete) {
+      habit.streak++;
+    }else if(habit.streak > 0){
+      habit.streak--;
+    }
     
     // 2. Save changes to Hive immediately
     await habit.save(); 
