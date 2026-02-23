@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
 import 'package:habit_tracker/data/local/habit_provider.dart';
-import 'package:habit_tracker/data/models/habit.dart';
-import 'package:habit_tracker/data/repositories/habit_repository.dart';
 import 'package:habit_tracker/presentation/widgets/bottom_nav_bar.dart';
 import 'package:habit_tracker/presentation/widgets/date_row.dart';
 import 'package:habit_tracker/presentation/widgets/done_habits_badge.dart';
@@ -22,20 +20,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   @override
-  void initState() {
-    super.initState();
-    // Load habits when screen appears (auto-updates streaks)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HabitProvider>(context, listen: false).loadHabits();
-    });
-  }
+void initState() {
+  super.initState();
+  Future.microtask(() {
+    // ignore: use_build_context_synchronously
+    context.read<HabitProvider>().loadHabits();
+  });
+}
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.colorScheme;
 
-    final List<Habit> habits = context.watch<HabitProvider>().habits.reversed.toList();
+    final habits = context.watch<HabitProvider>().habits;
 
     return Scaffold(
       appBar: AppBar(

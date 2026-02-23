@@ -22,13 +22,14 @@ class HabitAdapter extends TypeAdapter<Habit> {
       iconCodePoint: fields[2] as int,
       isCompleted: fields[3] as bool,
       streak: fields[4] as int,
+      lastCompletedDate: fields[5] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Habit obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class HabitAdapter extends TypeAdapter<Habit> {
       ..writeByte(3)
       ..write(obj.isCompleted)
       ..writeByte(4)
-      ..write(obj.streak);
+      ..write(obj.streak)
+      ..writeByte(5)
+      ..write(obj.lastCompletedDate);
   }
 
   @override

@@ -4,7 +4,6 @@ import 'package:habit_tracker/core/constants/app_strings.dart';
 import 'package:habit_tracker/data/local/habit_provider.dart';
 import 'package:habit_tracker/data/models/habit.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
-import 'package:habit_tracker/data/repositories/habit_repository.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
 import 'package:habit_tracker/presentation/widgets/select_ic_buttons.dart';
 import 'package:provider/provider.dart';

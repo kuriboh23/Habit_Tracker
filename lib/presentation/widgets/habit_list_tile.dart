@@ -78,7 +78,7 @@ class _HabitListTileState extends State<HabitListTile> {
             ),
             child: ListTile(
               onTap: () async{
-                await habitProvider.toggleHabitCompletion(widget.habit);
+                await habitProvider.toggleHabit(widget.habit);
               },
               leading: Container(
                 padding: EdgeInsets.all(12),

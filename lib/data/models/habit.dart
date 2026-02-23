@@ -19,11 +19,15 @@ class Habit extends HiveObject {
   @HiveField(4)
   int streak;
 
+  @HiveField(5)
+  DateTime? lastCompletedDate;
+
   Habit({
     required this.title,
     required this.colorValue,
     required this.iconCodePoint,
     this.isCompleted = false,
     this.streak = 0,
+    this.lastCompletedDate
   });
 }

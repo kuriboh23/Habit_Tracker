@@ -31,8 +31,6 @@ int getTodayDate() {
   return DateTime.now().day;
 }
 
-
-
   // --- Private helper to format date dynamically ---
   String getFormattedDate({DateTime? date}) {
     DateTime now = date ?? DateTime.now();

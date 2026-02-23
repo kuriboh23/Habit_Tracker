@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
 import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:habit_tracker/presentation/screens/add_habit_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -42,13 +40,7 @@ class BottomNavBar extends StatelessWidget {
             size: 26,
             label: AppStrings.homeNewHabitBtn,
             function: () {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                Navigator.of(context).push(PageRouteBuilder(
-                  pageBuilder: (context, animation, secondaryAnimation) => const AddHabitPage(),
-                  transitionDuration: Duration.zero,
-                  reverseTransitionDuration: Duration.zero,
-                ));
-              });
+              Navigator.pushNamed(context, '/addHabitPage');
             },
           ),
           const Spacer(),
