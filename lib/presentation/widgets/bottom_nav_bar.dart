@@ -21,13 +21,6 @@ class BottomNavBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: colors.onSurface, 
         borderRadius: BorderRadius.circular(40), 
-        boxShadow: [
-          BoxShadow(
-            color: colors.surface.withAlpha(200),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          )
-        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center, 
@@ -44,7 +37,7 @@ class BottomNavBar extends StatelessWidget {
             },
           ),
           const Spacer(),
-          NavIconButton(colors: colors, icon: Icons.auto_graph_rounded),
+          NavIconButton(colors: colors, icon: Icons.auto_graph_rounded,),
           NavIconButton(colors: colors, icon: Icons.person_2_rounded)
         ],
       ),

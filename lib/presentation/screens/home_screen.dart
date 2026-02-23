@@ -40,10 +40,10 @@ void initState() {
         scrolledUnderElevation: 0,
         title: Text(AppStrings.homeDateHeading, style: theme.textTheme.headlineLarge),
         backgroundColor: Colors.transparent,
-        actions: [
+         actions: [
           StreakBadge(count: 2, iconPath: 'assets/icons/flame.svg', backgroundColor: colors.secondary),
           SizedBox(width: 12,)
-        ],
+        ], 
       ),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),

@@ -4,6 +4,7 @@ import 'package:habit_tracker/data/repositories/habit_repository.dart';
 
 class HabitProvider extends ChangeNotifier {
   final HabitRepository _repository = HabitRepository();
+  HabitRepository get repo => _repository;
 
   List<Habit> _habits = [];
 

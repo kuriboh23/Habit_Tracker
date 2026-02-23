@@ -19,7 +19,7 @@ class Habit extends HiveObject {
   @HiveField(4)
   int streak;
 
-  @HiveField(5)
+  @HiveField(6)
   DateTime? lastCompletedDate;
 
   Habit({

@@ -47,7 +47,7 @@ class _HabitListTileState extends State<HabitListTile> {
           motion: BehindMotion(),
           extentRatio: 0.5,
           children: [
-            SlidableAction(
+            /* SlidableAction(
               onPressed: widget.onPressed,
               icon: Icons.skip_next_rounded,
               backgroundColor: colors.onSurface.withAlpha(220),
@@ -56,15 +56,16 @@ class _HabitListTileState extends State<HabitListTile> {
                 bottomLeft: Radius.circular(16),
               ),
               label: 'Skip',
-            ),
+            ), */
             SlidableAction(
               onPressed: widget.onDelete,
               icon: Icons.delete_forever_rounded,
-              backgroundColor: colors.error,
-              borderRadius: BorderRadius.only(
+              backgroundColor: colors.error.withAlpha(225),
+/*               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(16),
                 bottomRight: Radius.circular(16),
-              ),
+              ), */
+              borderRadius: BorderRadius.circular(16),
               label: 'Delete',
             ),
           ],
