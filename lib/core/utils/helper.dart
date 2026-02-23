@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/constants/lists.dart';
 import 'package:habit_tracker/core/theme/habits_palletes.dart';
+import 'package:habit_tracker/data/models/icon_section.dart';
 import 'package:intl/intl.dart';
 
 class Helper {
@@ -60,84 +61,222 @@ int getTodayDate() {
 
   final List<Color> colorsPalletes = HabitPalettes.colors;
 
-  final List<IconData> iconOptions = AppLists.iconOptions;
+  final List<IconSection> iconSections = AppLists.iconSections;
 
   IconData selectedIcon = Icons.emoji_emotions_outlined;
   Color selectedColor = HabitPalettes.colors[2];
 
-  Future<IconData> showIconPicker(BuildContext context) async {
-    final icon = await showModalBottomSheet<IconData>(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
-      builder: (context) {
-        final theme = Theme.of(context);
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: GridView.count(
-            crossAxisCount: 3,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            children: iconOptions.map((ic) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context).pop(ic),
-                child: Center(
-                  child: Container(
-                    padding: EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: theme.colorScheme.onSurface,
-                    ),
-                    child: Icon(ic, size: 28, color: theme.colorScheme.surface)),
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
-    );
+Future<IconData> showIconPicker(BuildContext context) async {
+  final icon = await showModalBottomSheet<IconData>(
+    context: context,
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+    builder: (context) {
+      final theme = Theme.of(context);
 
-    if (icon != null) {
-      selectedIcon = icon;
-      return icon;
-    }
-    return selectedIcon;
+      return Container(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(24),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            // Drag handle
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withAlpha(40),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+
+            Text(
+              "Choose an Icon",
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                fontSize: 22
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            SizedBox(
+              height: 400, // keeps it compact, not full screen
+              child: ListView.builder(
+                itemCount: iconSections.length,
+                itemBuilder: (context, index) {
+                  final section = iconSections[index];
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        section.title,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
+                        itemCount: section.icons.length,
+                        itemBuilder: (context, i) {
+                          final ic = section.icons[i];
+                          final isSelected = ic == selectedIcon;
+
+                          return GestureDetector(
+                            onTap: () =>
+                                Navigator.of(context).pop(ic),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isSelected
+                                    ? selectedColor.withAlpha(50)
+                                    : theme.colorScheme.surface,
+                                border: isSelected
+                                    ? Border.all(
+                                        color: selectedColor,
+                                        width: 2,
+                                      )
+                                    : null,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Icon(
+                                ic,
+                                size: 24,
+                                color: isSelected
+                                    ? selectedColor
+                                    : theme.colorScheme.onSurface,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+
+                      const SizedBox(height: 20),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+
+  if (icon != null) {
+    selectedIcon = icon;
+    return icon;
   }
+
+  return selectedIcon;
+}
 
   Future<Color> showColorPicker(BuildContext context) async {
-    final color = await showModalBottomSheet<Color>(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: GridView.count(
-            crossAxisCount: 4,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            children: colorsPalletes.map((c) {
-              return GestureDetector(
-                onTap: () => Navigator.of(context).pop(c),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: c,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        );
-      },
-    );
+  final color = await showModalBottomSheet<Color>(
+    context: context,
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+    builder: (context) {
+      final theme = Theme.of(context);
 
-    if (color != null) {
-      selectedColor = color;
-      return color;
-    }
-    return selectedColor;
+      return Container(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(24),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            // Drag handle
+            Container(
+              width: 40,
+              height: 4,
+              margin: const EdgeInsets.only(bottom: 16),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.onSurface.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+
+            Text(
+              "Choose a Color",
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            GridView.builder(
+              shrinkWrap: true,
+              itemCount: colorsPalletes.length,
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 5,
+                crossAxisSpacing: 14,
+                mainAxisSpacing: 14,
+              ),
+              itemBuilder: (context, index) {
+                final c = colorsPalletes[index];
+                final isSelected = c == selectedColor;
+
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).pop(c),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 150),
+                    decoration: BoxDecoration(
+                      color: c,
+                      shape: BoxShape.circle,
+                      border: isSelected
+                          ? Border.all(
+                              color: theme.colorScheme.onSurface,
+                              width: 2,
+                            )
+                          : null,
+                    ),
+                    child: isSelected
+                        ? const Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 18,
+                          )
+                        : null,
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+
+  if (color != null) {
+    selectedColor = color;
+    return color;
   }
+
+  return selectedColor;
+}
 }

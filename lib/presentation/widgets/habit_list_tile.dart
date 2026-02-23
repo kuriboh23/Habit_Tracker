@@ -111,8 +111,8 @@ class _HabitListTileState extends State<HabitListTile> {
                 ),
               ),
               trailing: checkValue
-                  ? Icon(Icons.radio_button_checked, color: colors.surface)
-                  : Icon(Icons.circle_outlined),
+                  ? Icon(Icons.radio_button_checked, color: colors.surface, size: 28,)
+                  : Icon(Icons.circle_outlined, size: 28,),
               /*     trailing: Checkbox(
                 value: checkValue,
                 onChanged: (value) {

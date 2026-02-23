@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/core/constants/app_strings.dart';
-import 'package:habit_tracker/data/local/habit_provider.dart';
 import 'package:habit_tracker/presentation/widgets/app_button.dart';
 import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
-import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({

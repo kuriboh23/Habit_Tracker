@@ -6,7 +6,6 @@ import 'package:habit_tracker/presentation/widgets/bottom_nav_bar.dart';
 import 'package:habit_tracker/presentation/widgets/date_row.dart';
 import 'package:habit_tracker/presentation/widgets/done_habits_badge.dart';
 import 'package:habit_tracker/presentation/widgets/habit_list_tile.dart';
-import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
 // import 'package:habit_tracker/presentation/widgets/streak_badge.dart';
 import 'package:provider/provider.dart';
 
