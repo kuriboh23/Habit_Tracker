@@ -6,7 +6,8 @@ import 'package:habit_tracker/presentation/widgets/bottom_nav_bar.dart';
 import 'package:habit_tracker/presentation/widgets/date_row.dart';
 import 'package:habit_tracker/presentation/widgets/done_habits_badge.dart';
 import 'package:habit_tracker/presentation/widgets/habit_list_tile.dart';
-import 'package:habit_tracker/presentation/widgets/streak_badge.dart';
+import 'package:habit_tracker/presentation/widgets/nav_icon_button.dart';
+// import 'package:habit_tracker/presentation/widgets/streak_badge.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,16 +42,22 @@ void initState() {
         title: Text(AppStrings.homeDateHeading, style: theme.textTheme.headlineLarge),
         backgroundColor: Colors.transparent,
          actions: [
-          StreakBadge(count: 2, iconPath: 'assets/icons/flame.svg', backgroundColor: colors.secondary),
+          // StreakBadge(count: 0, iconPath: 'assets/icons/flame.svg', backgroundColor: colors.secondary),
+          CircleAvatar(
+            backgroundColor: colors.onSurface,
+            child: IconButton(onPressed: () {
+              
+            }, icon: Icon(Icons.person_2_rounded)),
+          ),
           SizedBox(width: 12,)
-        ], 
+        ],
       ),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 28,),
+              SizedBox(height: 24,),
               DateRow(),
               SizedBox(height: 26,),
               Row(

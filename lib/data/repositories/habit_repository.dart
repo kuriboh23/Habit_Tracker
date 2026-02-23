@@ -7,6 +7,7 @@ class HabitRepository {
 
   Box<Habit> get _box => Hive.box<Habit>(boxName);
 
+
   // CREATE
   Future<void> addHabit(Habit habit) async {
     await _box.add(habit);
@@ -91,5 +92,4 @@ class HabitRepository {
 
     await habit.save();
   }
-
 }

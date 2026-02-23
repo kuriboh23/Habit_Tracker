@@ -15,11 +15,11 @@ class AppTheme {
       ),
     ),
     scaffoldBackgroundColor: AppColors.lightBackground,
-    primaryColor: AppColors.primary,
+    primaryColor: AppColors.lightSurface,
     fontFamily: 'Nunito',
     
     colorScheme: const ColorScheme.light(
-      primary: AppColors.primary,
+      primary: AppColors.lightSurface,
       secondary: AppColors.secondary,
       surface: AppColors.lightSurface,
       onSurface: AppColors.lightText,
@@ -56,7 +56,7 @@ class AppTheme {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       fillColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return AppColors.primary;
+          return AppColors.lightSurface;
         }
         return Colors.transparent;
       }),

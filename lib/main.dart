@@ -14,7 +14,6 @@ void main() async{
   await Hive.initFlutter();
 
   Hive.registerAdapter(HabitAdapter());
-
   await Hive.openBox<Habit>(HabitRepository.boxName);
 
   runApp(

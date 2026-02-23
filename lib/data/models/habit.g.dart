@@ -22,7 +22,7 @@ class HabitAdapter extends TypeAdapter<Habit> {
       iconCodePoint: fields[2] as int,
       isCompleted: fields[3] as bool,
       streak: fields[4] as int,
-      lastCompletedDate: fields[5] as DateTime?,
+      lastCompletedDate: fields[6] as DateTime?,
     );
   }
 
@@ -40,7 +40,7 @@ class HabitAdapter extends TypeAdapter<Habit> {
       ..write(obj.isCompleted)
       ..writeByte(4)
       ..write(obj.streak)
-      ..writeByte(5)
+      ..writeByte(6)
       ..write(obj.lastCompletedDate);
   }
 
